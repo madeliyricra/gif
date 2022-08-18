@@ -46,7 +46,7 @@ h3 {
 }
 
 .card-grid {
-  column-count: 4;
+  columns: 5 250px;
   column-gap: 20px;
 }
 

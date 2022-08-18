@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getGifsXName } from "../../../../services/api"
+import Gif from "../Gif"
 
 interface Icategory {
   name: string,
@@ -27,11 +28,11 @@ const GifsCategory = (props: Icategory) => {
   return (
     <article>
       <h3>{name}</h3>
-      <ol>
+      <div className="card-grid">
         {
-          gifs?.map((gif: IGif) => <li><img src={gif.url}/></li>)
+          gifs?.map((gif: IGif) => <Gif key={gif.id} {...gif}/>)
         }
-      </ol>
+      </div>
     </article>
   )
 }

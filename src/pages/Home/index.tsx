@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Search } from "../../components"
-import { AddCategory, Categories } from "./childrens"
+import { getGifsXName } from "../../services/api"
+import { AddCategory, GifsCategory } from "./childrens"
 
 interface ICategory {
   name: string
@@ -9,26 +10,30 @@ interface ICategory {
 const Home = () => {
   const [categories, setCategories] = useState(['One Punch', 'Dragon ball'])
 
-  useEffect(() => {
-    
-  }, [])
+  const changeNewCategory = (newCategory: string) => {
+    const categoriesLowerCase = categories.map((category) => category?.toLowerCase())
+    const newCategoryLowerCase = newCategory.toLowerCase()
+    if(categoriesLowerCase.includes(newCategoryLowerCase)) return 
 
-  const onAddCategory = (e: { target: HTMLInputElement }) =>{
-    const value = e?.target?.value
-    // setCategories([value, ...categories])
-  }
+    setCategories([newCategory, ...categories])
+  } 
 
   const returnListCategories = () =>{
-    return categories?.map((category, key) => <li key={key}>{category}</li>)
+    return categories?.map((category) => (
+      <GifsCategory 
+        key={category}
+        name={category}
+      />
+    ))
   }
-  
+
   return (
     <>
       <h1>Gif</h1>
-      <AddCategory />
-      <ol>
+      <AddCategory changeNewCategory={changeNewCategory} />
+      <section>
         {returnListCategories()}
-      </ol>
+      </section>
     </>
   )
 }

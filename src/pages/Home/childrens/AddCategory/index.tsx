@@ -1,7 +1,12 @@
 import { useState } from 'react'
 import { Search } from '../../../../components'
 
-const AddCategory = () => {
+interface IAddCategory {
+  changeNewCategory: (value: string) => void,
+}
+
+const AddCategory = (props: IAddCategory) => {
+  const { changeNewCategory } = props
   const [search, setSearch] = useState('')
 
   const handleSearch = (e: { target: HTMLInputElement }) => {
@@ -11,7 +16,9 @@ const AddCategory = () => {
 
   const handleDownSearch = (e : { keyCode: number }) =>{
     if (e.keyCode == 13) {
-      console.log(search)
+      if(search.trim()?.length <= 2) return
+      changeNewCategory(search.trim())
+      setSearch('')
     }
   }
 

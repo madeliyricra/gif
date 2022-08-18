@@ -1,10 +1,5 @@
 import React from 'react'
-
-interface IGif {
-  id: string,
-  title: string,
-  url: string,
-}
+import { IGif } from '../../props'
 
 const Gif = (props: IGif) => {
   const { title, url } = props

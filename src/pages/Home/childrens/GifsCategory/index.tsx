@@ -1,29 +1,31 @@
 import { useFetchGifs } from "../../../../hooks/useFetchGifs"
+import { IGif } from "../../props"
 import Gif from "../Gif"
 
 interface Icategory {
   name: string,
 }
 
-interface IGif {
-  id: string,
-  title: string,
-  url: string,
-}
-
 const GifsCategory = (props: Icategory) => {
   const {name} = props
   const {gifs, isLoading} = useFetchGifs(name)
-  console.log(isLoading)
 
-  return (
-    <article>
-      <h3>{name}</h3>
+  const returnGifs = () => {
+    if(isLoading) return <h2>Cargando ...</h2>
+
+    return (
       <div className="card-grid">
         {
           gifs?.map((gif: IGif) => <Gif key={gif.id} {...gif}/>)
         }
       </div>
+    )
+  }
+
+  return (
+    <article>
+      <h3 className="title">{name}</h3>
+      {returnGifs()}
     </article>
   )
 }

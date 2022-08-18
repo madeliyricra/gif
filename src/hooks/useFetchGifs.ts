@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react"
 import { getGifsXName } from "../services/api"
 
+interface IGif {
+  id: string,
+  title: string,
+  url: string,
+}
+
 export const useFetchGifs = (nameCategory: string) => {
-  const [gifs, setGifs] = useState([])
+  const [gifs, setGifs] = useState<IGif[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   const getGifs = async () =>{
-    const newGifs : any = await getGifsXName(nameCategory)
+    const newGifs : IGif[] = await getGifsXName(nameCategory)
     setGifs(newGifs)
     setIsLoading(false)
   }

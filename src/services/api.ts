@@ -7,7 +7,7 @@ interface IGif {
 }
 
 export const getGifsXName = async  (category: string) => {
-  const URL = `${API_URL}?api_key=${API_KEY}&q=${category}&limit=20`
+  const URL = `${API_URL}?api_key=${API_KEY}&q=${category}&limit=10`
   let gifs : IGif[] = []
 
   await fetch(URL)

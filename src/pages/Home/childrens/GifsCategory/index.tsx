@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-import { getGifsXName } from "../../../../services/api"
+import { useFetchGifs } from "../../../../hooks/useFetchGifs"
 import Gif from "../Gif"
 
 interface Icategory {
@@ -14,16 +13,8 @@ interface IGif {
 
 const GifsCategory = (props: Icategory) => {
   const {name} = props
-  const [gifs, setGifs] = useState([])
-
-  const getGifs = async () =>{
-    const newGifs : any = await getGifsXName(name)
-    setGifs(newGifs)
-  }
-
-  useEffect(() => {
-    getGifs()
-  }, [])
+  const {gifs, isLoading} = useFetchGifs(name)
+  console.log(isLoading)
 
   return (
     <article>

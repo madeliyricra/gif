@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDebounce } from 'use-debounce'
 import { Search } from '../../../../components'
 
 interface IAddCategory {
@@ -8,19 +9,17 @@ interface IAddCategory {
 const AddCategory = (props: IAddCategory) => {
   const { changeNewCategory } = props
   const [search, setSearch] = useState('')
+  const [searchText] = useDebounce(search, 1000)
 
   const handleSearch = (e: { target: HTMLInputElement }) => {
     const value = e?.target?.value
     setSearch(value)
   }
 
-  const handleDownSearch = (e : { keyCode: number }) =>{
-    if (e.keyCode == 13) {
-      if(search.trim()?.length <= 2) return
-      changeNewCategory(search.trim())
-      setSearch('')
-    }
-  }
+  useEffect(() => {
+    changeNewCategory(search.trim())
+    setSearch('')
+  }, [searchText])
 
   return (
     <div>
@@ -29,7 +28,6 @@ const AddCategory = (props: IAddCategory) => {
         placeholder='Buscar gif...' 
         value={search}
         handleChange={handleSearch}
-        handleDown={handleDownSearch}
       />
     </div>
   )

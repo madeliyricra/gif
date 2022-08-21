@@ -5,11 +5,10 @@ interface ISearch {
   placeholder: string,
   value: string,
   handleChange?: (e: { target: HTMLInputElement }) => void,
-  handleDown?: (e: { keyCode: number }) => void
 }
 
 const Search = (props: ISearch) => {
-  const {id, placeholder, value, handleChange, handleDown} = props
+  const {id, placeholder, value, handleChange} = props
 
   return (
     <div>
@@ -20,7 +19,6 @@ const Search = (props: ISearch) => {
         autoComplete='off' 
         value={value}
         onChange={handleChange}
-        onKeyDown={handleDown}
       />
     </div>
   )

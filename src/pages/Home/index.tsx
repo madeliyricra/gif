@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { AddCategory, GifsCategory } from "./childrens"
-import logo from '/public/logo.png'
+
 interface ICategory {
   name: string
 }
 
 const Home = () => {
-  const [categories, setCategories] = useState<string[]>(['doraemon'])
+  const [categories, setCategories] = useState<string[]>([])
 
   const changeNewCategory = (newCategory: string) => {
     const categoriesLowerCase = categories?.map((category) => category?.toLowerCase())
@@ -27,7 +27,7 @@ const Home = () => {
 
   return (
     <>
-      <img className="logo" src={logo} />
+      <img className="logo" src='/logo.png' />
       <AddCategory changeNewCategory={changeNewCategory} />
       <section>
         {returnListCategories()}

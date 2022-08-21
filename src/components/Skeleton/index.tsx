@@ -1,6 +1,6 @@
 import { Container } from './styled'
 
-interface ISkeleton {
+export interface ISkeleton {
   width?: string;
   height: string;
 }

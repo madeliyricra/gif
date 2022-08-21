@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components"
-import { ISkeleton } from "./props"
+import { ISkeleton } from "."
 
 const animationSkeleton = keyframes`
   0%{

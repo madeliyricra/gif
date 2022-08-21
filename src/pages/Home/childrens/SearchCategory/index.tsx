@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
-import { useDebounce } from 'use-debounce'
+import { useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 import { Search } from '../../../../components'
+import { Container } from './styled'
 
 interface IAddCategory {
   changeNewCategory: (value: string) => void,
@@ -9,27 +10,27 @@ interface IAddCategory {
 const AddCategory = (props: IAddCategory) => {
   const { changeNewCategory } = props
   const [search, setSearch] = useState('')
-  const [searchText] = useDebounce(search, 1000)
+  const debounced = useDebouncedCallback(
+    (search) => {
+      changeNewCategory(search.trim())
+      setSearch('')
+    }, 1500)
 
   const handleSearch = (e: { target: HTMLInputElement }) => {
     const value = e?.target?.value
     setSearch(value)
+    if(value?.length > 2) debounced(value)
   }
 
-  useEffect(() => {
-    changeNewCategory(search.trim())
-    setSearch('')
-  }, [searchText])
-
   return (
-    <div>
+    <Container>
       <Search 
-        id="categroy_search"
+        id="category_search"
         placeholder='Buscar gif...' 
         value={search}
         handleChange={handleSearch}
       />
-    </div>
+    </Container>
   )
 }
 

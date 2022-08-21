@@ -13,8 +13,12 @@ export const useFetchGifs = (nameCategory: string) => {
 
   const getGifs = async () =>{
     const newGifs : IGif[] = await getGifsXName(nameCategory)
-    setGifs(newGifs)
-    setIsLoading(false)
+    try{
+      setGifs(newGifs)
+    }catch{}
+    finally{
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {

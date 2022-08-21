@@ -1,2 +1,2 @@
-export {default as AddCategory} from './AddCategory'
+export {default as SearchCategory} from './SearchCategory'
 export {default as GifsCategory} from './GifsCategory'

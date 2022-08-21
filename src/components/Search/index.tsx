@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { Container, Input } from './styled'
 
 interface ISearch {
   id: string,
@@ -7,12 +7,12 @@ interface ISearch {
   handleChange?: (e: { target: HTMLInputElement }) => void,
 }
 
-const Search = (props: ISearch) => {
+const index = (props: ISearch) => {
   const {id, placeholder, value, handleChange} = props
 
   return (
-    <div>
-      <input 
+    <Container>
+      <Input 
         id={id}
         type='search' 
         placeholder={placeholder} 
@@ -20,8 +20,8 @@ const Search = (props: ISearch) => {
         value={value}
         onChange={handleChange}
       />
-    </div>
+    </Container>
   )
 }
 
-export default Search
+export default index

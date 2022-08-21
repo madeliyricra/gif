@@ -1,31 +1,23 @@
 import { useFetchGifs } from "../../../../hooks/useFetchGifs"
-import { IGif } from "../../props"
-import Gif from "../Gif"
-
-interface Icategory {
-  name: string,
-}
+import { Icategory, IGif } from "../../props"
+import { SkeletonCategory } from "./childrens"
+import { Gif } from "../../../../components"
+import { ContainerGifs, Title } from "./styled"
 
 const GifsCategory = (props: Icategory) => {
   const {name} = props
   const {gifs, isLoading} = useFetchGifs(name)
 
-  const returnGifs = () => {
-    if(isLoading) return <h2>Cargando ...</h2>
-
-    return (
-      <div className="card-grid">
-        {
-          gifs?.map((gif: IGif) => <Gif key={gif.id} {...gif}/>)
-        }
-      </div>
-    )
-  }
-
   return (
     <article>
-      <h3 className="title">{name}</h3>
-      {returnGifs()}
+      <Title>{name}</Title>
+      {isLoading ? (
+        <SkeletonCategory />
+      ): (
+        <ContainerGifs>
+          { gifs?.map((gif: IGif) => <Gif key={gif.id} {...gif}/>) }
+        </ContainerGifs>
+      )}
     </article>
   )
 }

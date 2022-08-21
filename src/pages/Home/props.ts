@@ -3,3 +3,6 @@ export interface IGif {
   title: string,
   url: string,
 }
+export interface Icategory {
+  name: string,
+}

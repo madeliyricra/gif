@@ -1,17 +1,14 @@
 import { useState } from "react"
-import { AddCategory, GifsCategory } from "./childrens"
-
-interface ICategory {
-  name: string
-}
+import { lowerCase } from "../../utils"
+import { SearchCategory, GifsCategory } from "./childrens"
+import { Container, Logo } from "./styled"
 
 const Home = () => {
   const [categories, setCategories] = useState<string[]>([])
 
   const changeNewCategory = (newCategory: string) => {
-    const categoriesLowerCase = categories?.map((category) => category?.toLowerCase())
-    const newCategoryLowerCase = newCategory.toLowerCase()
-    if(categoriesLowerCase.includes(newCategoryLowerCase)) return 
+    const categoriesLowerCase = categories?.map((category) => lowerCase(category))
+    if(categoriesLowerCase.includes(lowerCase(newCategory))) return 
 
     setCategories([newCategory, ...categories])
   } 
@@ -26,13 +23,13 @@ const Home = () => {
   }
 
   return (
-    <>
-      <img className="logo" src='/logo.png' />
-      <AddCategory changeNewCategory={changeNewCategory} />
+    <Container>
+      <Logo src='/logo.png' alt="gif" />
+      <SearchCategory changeNewCategory={changeNewCategory} />
       <section>
         {returnListCategories()}
       </section>
-    </>
+    </Container>
   )
 }
 
